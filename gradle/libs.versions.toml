@@ -13,6 +13,8 @@ navigationCompose = "2.8.6"
 ksp-version = "2.0.21-1.0.27"
 hilt-version = "2.51.1"
 hilt-navigation = "1.2.0"
+lottie-version = "6.1.0"
+okhttp3-version = "4.10.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -35,6 +37,8 @@ navigation = { group = "androidx.navigation", name = "navigation-compose", versi
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt-version" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt-version" }
 hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-navigation" }
+lottie = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottie-version" }
+okhttp3 = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp3-version" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -32,6 +32,8 @@ import com.satoshi.lightningnodes.R
 import com.satoshi.lightningnodes.domain.model.Node
 import com.satoshi.lightningnodes.commons.navigation.ScreenState
 import com.satoshi.lightningnodes.feature.MainActivity
+import com.satoshi.lightningnodes.feature.error.ErrorScreen
+import com.satoshi.lightningnodes.feature.loading.LoadingScreen
 import com.satoshi.lightningnodes.feature.nodes.NodesViewModel.ScreenEvent
 import com.satoshi.lightningnodes.feature.nodes.NodesUiState.Presentation
 import com.satoshi.lightningnodes.ui.theme.LightningNodesTheme
@@ -39,27 +41,24 @@ import com.satoshi.lightningnodes.ui.theme.LightningNodesTheme
 @SuppressLint("ContextCastToActivity")
 @Composable
 fun NodesScreen(
-    viewModel: NodesViewModel = hiltViewModel(),
-    navigateUp: () -> Unit
+    viewModel: NodesViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) { viewModel.setup() }
     val activity = LocalContext.current as MainActivity
     Screen(uiState = viewModel.uiState, onAction = viewModel::onActionEvent)
-    EventConsumer(activity = activity, viewModel = viewModel, navigateUp = navigateUp)
+    EventConsumer(activity = activity, viewModel = viewModel)
 
 }
 
 @Composable
 private fun EventConsumer(
     activity: MainActivity,
-    viewModel: NodesViewModel,
-    navigateUp: () -> Unit
+    viewModel: NodesViewModel
 ) {
     LaunchedEffect(key1 = viewModel) {
         viewModel.eventsFlow.collect { event ->
             when (event) {
                 ScreenEvent.Finish -> activity.finish()
-                is ScreenEvent.NavigateUp -> navigateUp()
             }
         }
     }
@@ -77,9 +76,12 @@ private fun Screen(
                 .background(colorResource(id = R.color.white))
         ) {
             when (val screenState = uiState.screenState.collectAsStateWithLifecycle().value) {
-                is ScreenState.ScreenProgress -> {}
-                is ScreenState.ScreenError -> {}
+                is ScreenState.ScreenProgress -> LoadingScreen()
                 is ScreenState.ScreenContent -> ScreenContent(onAction = onAction, uiState = uiState)
+                is ScreenState.ScreenError -> ErrorScreen(
+                    onRetry = { onAction(NodesScreenAction.OnRetryClicked) },
+                    error = screenState.error
+                )
             }
         }
     }
@@ -101,7 +103,7 @@ private fun ScreenContent(
             modifier = Modifier.background(Color.LightGray)
         ) {
             items(presentation.size) {
-                Node(onAction = onAction, presentation = presentation[it])
+                Node(presentation = presentation[it])
                 HorizontalDivider(color = Color.White)
             }
         }
@@ -109,10 +111,7 @@ private fun ScreenContent(
 }
 
 @Composable
-private fun Node(
-    onAction: (NodesScreenAction) -> Unit,
-    presentation: Presentation
-) {
+private fun Node(presentation: Presentation) {
     Column(
         modifier = Modifier
             .padding(16.dp)
@@ -154,6 +153,6 @@ private fun LabelWithValue(
 @Preview
 private fun Preview() {
     Screen(uiState = NodesUiState().apply {
-        onScreenContent(listOf(Node.mock(), Node.mock(), Node.mock(), Node.mock()))
+        onScreenContent(listOf(Node.mock()))
     }) { }
 }

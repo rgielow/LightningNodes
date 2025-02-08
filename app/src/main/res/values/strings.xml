@@ -8,5 +8,6 @@
     <string name="node_updated_at">Atualizado em:</string>
     <string name="node_city">Cidade:</string>
     <string name="node_country">País:</string>
+    <string name="retry">Tente novamente</string>
 
 </resources>

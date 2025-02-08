@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
 
     private fun navGraphBuilder(builder: NavGraphBuilder) = builder.apply {
         composable(Navigation.Home.route) {
-            NodesScreen {  }
+            NodesScreen()
         }
     }
 

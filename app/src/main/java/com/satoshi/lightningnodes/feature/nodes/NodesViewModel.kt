@@ -4,19 +4,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.satoshi.lightningnodes.commons.events.ChannelEventSenderImpl
 import com.satoshi.lightningnodes.commons.events.EventSender
-import com.satoshi.lightningnodes.domain.model.Node
+import com.satoshi.lightningnodes.commons.network.fold
+import com.satoshi.lightningnodes.domain.usecase.GetNodesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class NodesViewModel @Inject constructor(
+    private val getNodesUseCase: GetNodesUseCase,
     val uiState: NodesUiState
 ) : ViewModel(),
     EventSender<NodesViewModel.ScreenEvent> by ChannelEventSenderImpl() {
 
-    private var isFirstGet = true
     fun setup() {
         getNodes()
     }
@@ -24,27 +24,22 @@ class NodesViewModel @Inject constructor(
     fun onActionEvent(action: NodesScreenAction) {
         action.fold(
             onCloseClicked = ::finish,
-            onNodeClicked = ::navigateUp,
-            onRefreshPulled = ::getNodes
+            onRefreshPulled = { getNodes(isRefreshing = true) },
+            onRetryClicked = ::getNodes
         )
     }
 
-    private fun getNodes() = viewModelScope.launch {
-        uiState.onScreenProgress(isRefreshing = isFirstGet.not())
-        delay(2000)
-        uiState.onScreenContent(
-            arrayListOf(Node.mock(), Node.mock())
+    private fun getNodes(isRefreshing: Boolean = false) = viewModelScope.launch {
+        uiState.onScreenProgress(isRefreshing = isRefreshing)
+        getNodesUseCase.execute().fold(
+            onFailure = { uiState.onScreenError(it) },
+            onSuccess = { uiState.onScreenContent(it) }
         )
-        isFirstGet = false
     }
 
     private fun finish() = viewModelScope.sendEvent(ScreenEvent.Finish)
 
-    private fun navigateUp(publicKey: String) =
-        viewModelScope.sendEvent(ScreenEvent.NavigateUp(publicKey))
-
     sealed class ScreenEvent {
         data object Finish : ScreenEvent()
-        data class NavigateUp(val publicKey: String) : ScreenEvent()
     }
 }

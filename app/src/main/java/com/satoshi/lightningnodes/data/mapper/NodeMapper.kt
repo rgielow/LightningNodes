@@ -8,7 +8,7 @@ import com.satoshi.lightningnodes.domain.model.Country
 import com.satoshi.lightningnodes.domain.model.Node
 import com.satoshi.lightningnodes.commons.extensions.orZero
 
-fun List<NodeResponse>.toNode() = map {
+fun List<NodeResponse>.toNodes() = map {
     Node(
         alias = it.alias.orEmpty(),
         capacity = it.capacity.orZero(),

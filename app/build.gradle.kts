@@ -40,6 +40,16 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
+    }
+
+    buildTypes {
+        release {
+            resValue("string", "BASE_URL", "https://mempool.space/")
+        }
+        debug {
+            resValue("string", "BASE_URL", "https://mempool.space/")
+        }
     }
 }
 
@@ -59,6 +69,8 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation)
+    implementation(libs.lottie)
+    implementation(libs.okhttp3)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
