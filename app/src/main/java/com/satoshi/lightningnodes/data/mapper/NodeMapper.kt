@@ -13,8 +13,8 @@ fun List<NodeResponse>.toNodes() = map {
         alias = it.alias.orEmpty(),
         capacity = it.capacity.orZero(),
         channels = it.channels.orZero(),
-        city = it.cityResponse?.toCity(),
-        country = it.countryResponse.toCountry(),
+        city = it.city?.toCity(),
+        country = it.country?.toCountry(),
         firstSeen = it.firstSeen.orZero(),
         publicKey = it.publicKey.orEmpty(),
         updatedAt = it.updatedAt.orZero(),
@@ -22,22 +22,22 @@ fun List<NodeResponse>.toNodes() = map {
 }
 
 fun CityResponse.toCity() = City(
-    de = de,
-    en = en,
-    es = es,
-    fr = fr,
-    ja = ja,
-    ptBR = ptBr,
-    ru = ru
+    de = de.orEmpty(),
+    en = en.orEmpty(),
+    es = es.orEmpty(),
+    fr = fr.orEmpty(),
+    ja = ja.orEmpty(),
+    ptBR = ptBr.orEmpty(),
+    ru = ru.orEmpty()
 )
 
-fun CountryResponse?.toCountry() = Country(
-    de = this?.de.orEmpty(),
-    en = this?.en.orEmpty(),
-    es = this?.es.orEmpty(),
-    fr = this?.fr.orEmpty(),
-    ja = this?.ja.orEmpty(),
-    ptBR = this?.ptBr.orEmpty(),
-    ru = this?.ru.orEmpty(),
-    zhCN = this?.zhCN.orEmpty()
+fun CountryResponse.toCountry() = Country(
+    de = de.orEmpty(),
+    en = en.orEmpty(),
+    es = es.orEmpty(),
+    fr = fr.orEmpty(),
+    ja = ja.orEmpty(),
+    ptBR = ptBr.orEmpty(),
+    ru = ru.orEmpty(),
+    zhCN = zhCn.orEmpty()
 )

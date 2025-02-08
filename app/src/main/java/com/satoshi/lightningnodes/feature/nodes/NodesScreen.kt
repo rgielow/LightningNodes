@@ -125,7 +125,6 @@ private fun Node(presentation: Presentation) {
         LabelWithValue(label = stringResource(R.string.node_updated_at), value = presentation.updatedAt)
         LabelWithValue(label = stringResource(R.string.node_city), value = presentation.city)
         LabelWithValue(label = stringResource(R.string.node_country), value = presentation.country)
-        Spacer(modifier = Modifier.padding(4.dp))
         LabelWithValue(label = stringResource(R.string.node_public_key), value = presentation.publicKey)
     }
 }

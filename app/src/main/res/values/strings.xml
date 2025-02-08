@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">LightningNodes</string>
 
-    <string name="node_public_key">Id:</string>
+    <string name="node_public_key">Chave Pública:</string>
     <string name="node_channels">Canais:</string>">
     <string name="node_capacity">Capacidade:</string>
     <string name="node_first_seen">Criação:</string>

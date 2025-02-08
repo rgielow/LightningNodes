@@ -1,5 +1,7 @@
 package com.satoshi.lightningnodes.feature.nodes
 
+import com.satoshi.lightningnodes.commons.extensions.toBitcoin
+import com.satoshi.lightningnodes.commons.extensions.toFormattedDate
 import com.satoshi.lightningnodes.commons.navigation.ScreenState
 import com.satoshi.lightningnodes.domain.model.City
 import com.satoshi.lightningnodes.domain.model.Country
@@ -37,16 +39,16 @@ class NodesUiState @Inject constructor() {
             publicKey = it.publicKey,
             alias = it.alias,
             channels = it.channels.toString(),
-            capacity = it.capacity.toString(),
-            firstSeen = it.firstSeen.toString(),
-            updatedAt = it.updatedAt.toString(),
+            capacity = it.capacity.toBitcoin(),
+            firstSeen = it.firstSeen.toFormattedDate(),
+            updatedAt = it.updatedAt.toFormattedDate(),
             city = it.city.getCity(),
             country = it.country.getCountry()
         )
     }
 
     private fun City?.getCity() = this?.ptBR?.ifEmpty { this.en } ?: EMPTY_STRING
-    private fun Country.getCountry() = this.ptBR.ifEmpty { this.en }
+    private fun Country?.getCountry() = this?.ptBR?.ifEmpty { this.en } ?: EMPTY_STRING
 
 
     data class Presentation(

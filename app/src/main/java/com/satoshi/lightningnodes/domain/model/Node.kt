@@ -5,10 +5,10 @@ data class Node(
     val capacity: Long,
     val channels: Int,
     val city: City?,
-    val country: Country,
-    val firstSeen: Int,
+    val country: Country?,
+    val firstSeen: Long,
     val publicKey: String,
-    val updatedAt: Int
+    val updatedAt: Long
 ) {
     companion object {
         fun mock() = Node(

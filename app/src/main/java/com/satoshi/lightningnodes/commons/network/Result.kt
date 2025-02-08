@@ -1,5 +1,6 @@
 package com.satoshi.lightningnodes.commons.network
 
+import android.util.Log
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -28,6 +29,7 @@ suspend fun <T> safeRunDispatcher(
         val result = block()
         Result.Success(result)
     } catch (ex: Exception) {
+        Log.e("safeRunDispatcher", ex.message.orEmpty())
         Result.Failure(ex.message.orEmpty())
     }
 }

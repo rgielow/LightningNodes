@@ -1,12 +1,14 @@
 package com.satoshi.lightningnodes.data.response
 
+import com.google.gson.annotations.SerializedName
+
 data class NodeResponse(
-    val alias: String?,
-    val capacity: Long?,
-    val channels: Int?,
-    val cityResponse: CityResponse?,
-    val countryResponse: CountryResponse?,
-    val firstSeen: Int?,
-    val publicKey: String?,
-    val updatedAt: Int?
+    @SerializedName("alias") val alias: String?,
+    @SerializedName("capacity") val capacity: Long?,
+    @SerializedName("channels") val channels: Int?,
+    @SerializedName("city") val city: CityResponse?,
+    @SerializedName("country") val country: CountryResponse?,
+    @SerializedName("firstSeen") val firstSeen: Long?,
+    @SerializedName("publicKey") val publicKey: String?,
+    @SerializedName("updatedAt") val updatedAt: Long?
 )
