@@ -1,4 +1,4 @@
-package com.satoshi.lightningnodes.extensions
+package com.satoshi.lightningnodes.commons.extensions
 
 
 private const val ZERO = 0

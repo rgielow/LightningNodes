@@ -6,7 +6,7 @@ import com.satoshi.lightningnodes.data.response.NodeResponse
 import com.satoshi.lightningnodes.domain.model.City
 import com.satoshi.lightningnodes.domain.model.Country
 import com.satoshi.lightningnodes.domain.model.Node
-import com.satoshi.lightningnodes.extensions.orZero
+import com.satoshi.lightningnodes.commons.extensions.orZero
 
 fun List<NodeResponse>.toNode() = map {
     Node(
