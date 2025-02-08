@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import com.satoshi.lightningnodes.commons.navigation.composeNavigate
 import com.satoshi.lightningnodes.commons.navigation.setNavigationContent
 import com.satoshi.lightningnodes.feature.MainFlowViewModel.Navigation
+import com.satoshi.lightningnodes.feature.nodes.NodesScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,7 +28,7 @@ class MainActivity : ComponentActivity() {
 
     private fun navGraphBuilder(builder: NavGraphBuilder) = builder.apply {
         composable(Navigation.Home.route) {
-
+            NodesScreen {  }
         }
     }
 

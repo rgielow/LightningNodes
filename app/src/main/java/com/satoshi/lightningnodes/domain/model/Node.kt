@@ -9,4 +9,17 @@ data class Node(
     val firstSeen: Int,
     val publicKey: String,
     val updatedAt: Int
-)
+) {
+    companion object {
+        fun mock() = Node(
+            alias = "WalletOfSatoshi.com",
+            capacity = 3000000,
+            channels = 8502,
+            city = City.mock(),
+            country = Country.mock(),
+            firstSeen = 5977,
+            publicKey = "035e4ff418fc8b5554c5d9eea66396c227bd429a3251c8cbc711002ba215bfc226",
+            updatedAt = 7068
+        )
+    }
+}

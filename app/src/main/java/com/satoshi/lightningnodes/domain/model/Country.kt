@@ -9,4 +9,17 @@ data class Country(
     val ptBR: String,
     val ru: String,
     val zhCN: String
-)
+) {
+    companion object {
+        fun mock() = Country(
+            de = "Kanada",
+            en = "Canada",
+            es = "Canadá",
+            fr = "Canada",
+            ja = "カナダ",
+            ptBR = "Canadá",
+            ru = "Канада",
+            zhCN = "加拿大"
+        )
+    }
+}
