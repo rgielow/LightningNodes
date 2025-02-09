@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -36,9 +37,13 @@ fun ErrorScreen(error: String, onRetry: () -> Unit) {
             iterations = LottieConstants.IterateForever
         )
         Spacer(modifier = Modifier.padding(8.dp))
-        Text(text = error)
+        Text(modifier = Modifier.padding(horizontal = 16.dp), text = error)
         Spacer(modifier = Modifier.padding(8.dp))
-        Button(onClick = { onRetry() }) {
+        Button(
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .fillMaxWidth(),
+            onClick = { onRetry() }) {
             Text(text = stringResource(R.string.retry))
         }
     }
