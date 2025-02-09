@@ -1,11 +1,10 @@
 ## Build Tools & Versions Used  
 
-- **Programming Language:** Kotlin  
-- **Build System:** Gradle
-- **Dependency injection:** Hilt
-- **Ui Kit:** Jetpack Compose
-- **Animations:** Lottie
-- **Unit tests:** Mockk
+- **Programming Language:** Kotlin:2.0.20
+- **Dependency injection:** Hilt: 2.51.1
+- **Ui Kit:** Jetpack Compose:1.5.15
+- **Animations:** Lottie:6.1.0
+- **Unit tests:** Mockk:1.13.13
 
 ## Steps to Run the App  
 
