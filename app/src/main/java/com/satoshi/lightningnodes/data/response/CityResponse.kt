@@ -11,4 +11,17 @@ data class CityResponse(
     @SerializedName("pt-BR") val ptBr: String?,
     @SerializedName("ru") val ru: String?,
     @SerializedName("zh-CN") val zhCn: String?,
-)
+) {
+    companion object {
+        fun mock() = CityResponse(
+            de = "Vancouver",
+            en = "Vancouver",
+            es = "Vancouver",
+            fr = "Vancouver",
+            ja = "バンクーバー市",
+            ptBr = "Vancôver",
+            ru = "Ванкувер",
+            zhCn = "加拿大"
+        )
+    }
+}

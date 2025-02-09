@@ -11,4 +11,17 @@ data class CountryResponse(
     @SerializedName("pt-BR") val ptBr: String?,
     @SerializedName("ru") val ru: String?,
     @SerializedName("zh-CN") val zhCn: String?
-)
+) {
+    companion object {
+        fun mock() = CountryResponse(
+            de = "Kanada",
+            en = "Canada",
+            es = "Canadá",
+            fr = "Canada",
+            ja = "カナダ",
+            ptBr = "Canadá",
+            ru = "Канада",
+            zhCn = "加拿大"
+        )
+    }
+}
